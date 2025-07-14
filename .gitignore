@@ -192,3 +192,7 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# unsloth training
+qwen3-devops-model/
+unsloth_compiled_cache/

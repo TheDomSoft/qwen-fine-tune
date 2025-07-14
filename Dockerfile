@@ -1,5 +1,5 @@
 # Dockerfile
-FROM nvidia/cuda:12.2.0-devel-ubuntu22.04
+FROM nvidia/cuda:12.6.0-devel-ubuntu22.04
 
 # Set environment variables
 ENV DEBIAN_FRONTEND=noninteractive
@@ -38,7 +38,6 @@ COPY requirements.txt .
 
 # Install Python dependencies with CUDA support
 RUN pip3 install --upgrade pip
-RUN pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 RUN pip3 install -r requirements.txt
 
 # Set up Hugging Face cache directory
