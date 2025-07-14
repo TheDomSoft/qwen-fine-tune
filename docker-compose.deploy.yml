@@ -24,4 +24,6 @@ services:
       --port 8000
       --max-model-len 2048
       --trust-remote-code
+      --enable-auto-tool-choice
+      --tool-call-parser hermes
     restart: unless-stopped
