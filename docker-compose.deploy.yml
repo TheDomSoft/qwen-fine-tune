@@ -1,0 +1,27 @@
+services:
+  qwen3-devops-server:
+    image: vllm/vllm-openai:latest
+    container_name: qwen3-devops-server
+    runtime: nvidia
+    ports:
+      - "8000:8000"
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - /home/ubuntu/qwen-fine-tune/qwen3-devops-final-merged:/app/model
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    working_dir: /app
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    command: >
+      --model /app/model
+      --host 0.0.0.0
+      --port 8000
+      --max-model-len 2048
+      --trust-remote-code
+    restart: unless-stopped
