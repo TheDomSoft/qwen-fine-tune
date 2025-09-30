@@ -4,12 +4,11 @@ services:
     container_name: qwen3-devops-server
     runtime: nvidia
     ports:
-      - "8000:8000"
+      - "8001:8000"
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
     volumes:
-      - /home/ubuntu/qwen-fine-tune/qwen3-devops-final-merged:/app/model
-      - ~/.cache/huggingface:/root/.cache/huggingface
+      - ./qwen3-devops-final-merged:/app/progtom/devops-model
     working_dir: /app
     deploy:
       resources:
@@ -19,11 +18,15 @@ services:
               count: all
               capabilities: [gpu]
     command: >
-      --model /app/model
+      --model progtom/devops-model
       --host 0.0.0.0
       --port 8000
-      --max-model-len 2048
+      --max-model-len 32768
+      --gpu-memory-utilization 0.9
       --trust-remote-code
       --enable-auto-tool-choice
       --tool-call-parser hermes
+      --enable-reasoning
+      --reasoning-parser deepseek_r1
+      
     restart: unless-stopped

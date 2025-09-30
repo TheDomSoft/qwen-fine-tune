@@ -5,11 +5,14 @@ Quick script to merge your specific LoRA checkpoint to full model
 
 from unsloth import FastLanguageModel
 import os
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 def quick_merge():
     # Your actual paths
-    lora_path = "/workspace/qwen3-devops-model/checkpoint-50"
-    output_path = "/workspace/qwen3-devops-final-merged"
+    lora_path = "qwen3_fine_tune_output/checkpoint-20"
+    output_path = "qwen3-devops-final-merged"
     
     print(f"🔄 Loading LoRA model from: {lora_path}")
     
